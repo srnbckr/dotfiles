@@ -1,0 +1,154 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"   Filename:   .vimrc                                                       "
+"   Maintainer: Soeren Becker <mail@soerenbecker.org>                        "
+"                                                                            "
+"                           Vim Configuration File                           "
+"                                                                            "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 01. General                                                                "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible         " no Vi compatibility mode. SET FIRST!
+set shell=/bin/bash      " vim should use bash even when using fish as standard shell
+filetype off             " required for vundle
+set number               " show line numbers
+set tabstop=4            " TAB = 4 Spaces
+set softtabstop=4        " number of spaces in tab when editing
+set expandtab            " tabs are spaces
+set cursorline           " hilight current line
+set wildmenu             " autocomplete for commands
+set lazyredraw           " redraw only when needed
+set showmatch            " hilight parenthesis 
+set incsearch            " search as characters are entere
+set hlsearch             " highlight search matches
+set mouse=a              " enable mouse
+set ttymouse=xterm2      " fix slow mouse in vim/tmux
+set title                " change the terminal's title
+set visualbell           " don't beep
+set noerrorbells         " don't beep/
+set autoindent           " always set autoindenting on
+set copyindent           " copy the previous indentation on autoindenting
+set nobackup             " no backup file 
+set noswapfile           " no .swp file
+set updatetime=250       " set update time to 250ms
+set term=xterm-256color
+set guifont=Ubuntu\ Mono\ derivative\ Powerline:10
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 02. Vundle / Pugins                                                        "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set rtp+=~/.vim/bundle/Vundle.vim          " set runtime path
+call vundle#begin()                        " initialize
+
+Plugin 'VundleVim/Vundle.vim'              " vundle Plugin
+Plugin 'scrooloose/nerdtree'               " NerdTree
+Plugin 'Xuyuanp/nerdtree-git-plugin'       " NERDtree Git Plugin
+Plugin 'ervandew/supertab'                 " SuperTAB for YCM/UltiSnips interaction
+Plugin 'Valloric/YouCompleteMe'            " YouCompleteMe Semantic auto completion 
+Plugin 'kien/ctrlp.vim'                    " Fuzzy Search Plugin 
+Plugin 'tpope/vim-fugitive'                " Fugitive Plugin 
+Plugin 'scrooloose/syntastic'              " Syntastic Plugin 
+Plugin 'vim-airline/vim-airline'           " Airline Plugin
+Plugin 'vim-airline/vim-airline-themes'    " Airline Themes
+Plugin 'airblade/vim-gitgutter'            " Git Gutter Plugin
+Plugin 'terryma/vim-multiple-cursors'      " Multiple cursor Plugin
+Plugin 'SirVer/ultisnips'                  " Ultisnips Engine
+Plugin 'honza/vim-snippets'                " Snippets
+Plugin 'godlygeek/tabular'                 " Tabular
+Plugin 'dougireton/vim-chef'              " Vim Chef
+"Plugin 'tomtom/tlib_vim'                  " Dependency for Vim Chef
+"Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'chriskempson/base16-vim'           " Base 16 Colorscheme
+Plugin 'narkisr/vim-chef-detect'
+Plugin 'tpope/vim-commentary'              " Comment Stuff out
+"
+" Plugins for Meteor Framework
+"
+Plugin 'ternjs/tern_for_vim'               " Tern Plugin
+Plugin 'Slava/tern-meteor'              " Tern Meteor
+
+call vundle#end()                    " all Plugins must be added before this line
+
+filetype plugin indent on
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 03. Plugin Configuration                                                   "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""" NERDtree
+" close Vim if NERDtree is last window
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif 
+
+
+"""" Syntastics
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0 
+let g:syntastic_check_on_wq = 1
+
+"""" Multiple Cursor Plugin
+let g:multi_cursor_use_default_mapping=0
+let g:multi_cursor_next_key='<alt>'
+let g:multi_cursor_prev_key='<C-l>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+
+"""" UltiSnips
+let g:UltiSnipsExpandTrigger       = '<tab>'
+let g:UltiSnipsListSnippets        = '<c-l>'
+let g:UltiSnipsJumpForwardTrigger  = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+"""" Airline
+let g:airline_theme='base16'
+set laststatus=2  " show airline always
+let g:airline#extensions#tabline#enabled = 1 " enable Buffer List
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_powerline_fonts=1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 03. Colors                                                                 "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syntax enable              " enable syntax highlighting:w
+let base16colorspace=256   " Access colors present in 256 colorspac
+set t_Co=256               " 256 color mode
+set background=dark        " background color dark/light
+colorscheme base16-default " colorscheme
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 04. Normal Bindings                                                        "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+imap <C-Space> <ESC>              " CTRL-Space = Escape
+map <C-n> :NERDTreeToggle<CR>     " Open/Close NERDtree with CRTL-N
+map <C-p> :CtrlP<CR>              " Open/Close Fuzzy Search
+nmap <silent> ,/ :nohlsearch<CR>  " Clear Search Highlighting
+" reopen file with sudo rights
+cmap w!! w !sudo tee % >/dev/null 
+set pastetoggle=<F2>              " Toggle Past Mode with F2
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 05. Leader Bindings                                                        "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" <Leader> = Space
+let mapleader=" "                 " let Space be the Leader Key
+" <Leader><Leader> -- Open last buffer.
+nnoremap <Leader><Leader> <C-^>
+" <Leader>o sets focus on current split
+nnoremap <Leader>o :only<CR> "
+" <Leader>q quit current split
+nnoremap <Leader>q :quit<CR>
+" <Leader>w writes current file
+nnoremap <Leader>w :write<CR>
+
+
