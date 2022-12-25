@@ -4,9 +4,14 @@ test -d /opt/intellij/bin ; and set PATH $PATH /opt/intellij/bin/
 test -d /usr/local/go/bin ; and set PATH $PATH /usr/local/go/bin
 test -d ~/.local/bin ; and set PATH $PATH ~/.local/bin
 
-
 # Kube configs
 set -x KUBECONFIG (find ~/projects/cit/kube-configs -type f -name '*yaml' | tr '\n' ':' | sed 's/:$//')
+
+# Golang configuration
+set -x GOPATH (go env GOPATH)
+set -x PATH $PATH (go env GOPATH)/bin
+set -x GO111MODULE on
+
 
 # Nightfox Color Palette
 # Style: nightfox
