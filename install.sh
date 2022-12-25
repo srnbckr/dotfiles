@@ -2,7 +2,7 @@
 
 DOTFOLDERS="tmux fish nvim"
 
-for folder in $DOTFOLDERS; dof 
+for folder in $DOTFOLDERS; do 
     echo $folder
     stow  --target=$HOME --restow $folder
 done
