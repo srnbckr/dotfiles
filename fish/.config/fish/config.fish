@@ -5,12 +5,17 @@ test -d /usr/local/go/bin ; and set PATH $PATH /usr/local/go/bin
 test -d ~/.local/bin ; and set PATH $PATH ~/.local/bin
 
 # Kube configs
-set -x KUBECONFIG (find ~/projects/cit/kube-configs -type f -name '*yaml' | tr '\n' ':' | sed 's/:$//')
+if test -e ~/projects/cit/kube-configs  
+    set -x KUBECONFIG (find ~/projects/cit/kube-configs -type f -name '*yaml' | tr '\n' ':' | sed 's/:$//')
+end 
 
 # Golang configuration
-set -x GOPATH (go env GOPATH)
-set -x PATH $PATH (go env GOPATH)/bin
-set -x GO111MODULE on
+if type -q go
+    set -x GOPATH (go env GOPATH)
+    set -x PATH $PATH (go env GOPATH)/bin
+    set -x GO111MODULE on
+end 
+
 
 
 # Nightfox Color Palette
