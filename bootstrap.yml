@@ -1,6 +1,6 @@
 ---
 - name: Bootstrap device
-  hosts: localhost:
+  hosts: localhost
   tasks:
     - name: Install common role
       import_role:
@@ -9,3 +9,7 @@
     - name: Install nvim
       import_role:
         name: nvim
+
+    - name: Install fish
+      import_role:
+        name: fish
