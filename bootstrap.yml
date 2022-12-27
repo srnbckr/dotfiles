@@ -1,0 +1,11 @@
+---
+- name: Bootstrap device
+  hosts: localhost:
+  tasks:
+    - name: Install common role
+      import_role:
+        name: common
+
+    - name: Install nvim
+      import_role:
+        name: nvim

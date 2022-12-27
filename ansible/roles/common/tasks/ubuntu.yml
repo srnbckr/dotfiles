@@ -1,0 +1,10 @@
+---
+- name: Install common packages on Ubuntu
+  become: true
+  ansible.builtin.apt:
+    pkg:
+      - git
+      - htop
+      - tmux
+      - stow
+    state: present

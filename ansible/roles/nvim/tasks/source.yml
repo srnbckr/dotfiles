@@ -1,0 +1,35 @@
+---
+- name: Install nvim build dependencies in Ubuntu
+  become: true
+  apt:
+    name:
+      - ninja-build
+      - gettext
+      - libtool
+      - libtool-bin
+      - autoconf
+      - automake
+      - cmake
+      - g++
+      - pkg-config
+      - unzip
+      - curl
+      - doxygen
+    state: present
+
+- name: Clone git repository
+  ansible.builtin.git:
+    repo: https://github.com/neovim/neovim
+    dest: /tmp/neovim
+    version: master
+
+- name: Build neovim
+  community.general.make:
+    chdir: /tmp/neovim
+    params:
+      CMAKE_BUILD_TYPE: Release
+
+- name: Install neovim
+  community.general.make:
+    chdir: /tmp/neovim
+    target: install
