@@ -32,6 +32,9 @@ return require('packer').startup(function(use)
   -- vim-fugitive
   use('tpope/vim-fugitive')
 
+  -- vim-gitgutter
+  use('airblade/vim-gitgutter')
+
   -- nvim-tree
   use {
 	  'nvim-tree/nvim-tree.lua',
