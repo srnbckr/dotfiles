@@ -7,4 +7,6 @@
       - htop
       - tmux
       - stow
+      - zoxide
+      - fzf
     state: present
