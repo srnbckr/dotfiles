@@ -1,0 +1,10 @@
+---
+
+ubuntu_common_pkgs:
+  - git
+  - htop
+  - tmux
+  - stow
+  - zoxide
+  - fzf
+  - bat

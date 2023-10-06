@@ -3,6 +3,7 @@
 test -d /opt/intellij/bin ; and set PATH $PATH /opt/intellij/bin/
 test -d /usr/local/go/bin ; and set PATH $PATH /usr/local/go/bin
 test -d ~/.local/bin ; and set PATH $PATH ~/.local/bin
+test -d ~/.config/bin ; and set PATH $PATH ~/.config/bin
 
 # Kube configs
 if test -e ~/projects/cit/kube-configs  

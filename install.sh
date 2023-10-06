@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFOLDERS="tmux fish nvim"
+DOTFOLDERS="tmux fish nvim bin"
 
 for folder in $DOTFOLDERS; do 
     echo $folder

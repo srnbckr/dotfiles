@@ -2,11 +2,5 @@
 - name: Install common packages on Ubuntu
   become: true
   ansible.builtin.apt:
-    pkg:
-      - git
-      - htop
-      - tmux
-      - stow
-      - zoxide
-      - fzf
+    pkg: "{{ ubuntu_common_pkgs }}"
     state: present
