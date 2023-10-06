@@ -16,6 +16,8 @@ if type -q go
     set -x GO111MODULE on
 end 
 
+# env variables
+set -x XDG_CONFIG_HOME $HOME/.config
 
 
 # Nightfox Color Palette
