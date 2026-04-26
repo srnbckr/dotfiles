@@ -5,6 +5,10 @@ test -d /usr/local/go/bin ; and set PATH $PATH /usr/local/go/bin
 test -d ~/.local/bin ; and set PATH $PATH ~/.local/bin
 test -d ~/.config/bin ; and set PATH $PATH ~/.config/bin
 
+
+set -gx PATH $PATH $HOME/.krew/bin
+
+
 # Kube configs
 if test -e ~/projects/cit/kube-configs  
     set -x KUBECONFIG (find ~/projects/cit/kube-configs -type f -name '*yaml' | tr '\n' ':' | sed 's/:$//')
@@ -59,3 +63,12 @@ set -g fish_pager_color_description $comment
 
 # Init zoxide
 zoxide init fish | source
+
+# opencode
+fish_add_path /home/soeren/.opencode/bin
+
+# nvm (managed by nvm.fish plugin)
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
